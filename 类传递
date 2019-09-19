@@ -1,0 +1,75 @@
+#include "stdafx.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+class InventoryItem
+{
+private:
+	int partNum;    // Part number
+	string description;    // Item description
+	int onHand;    // Units on hand
+	double price;    // Unit price
+public:
+	void storeInfo(int p, string d, int oH, double cost);// Prototype
+	int getPartNum() const
+	{
+		return partNum;
+	}
+	string getDescription() const
+	{
+		return description;
+	}
+	int getOnHand() const
+	{
+		return onHand;
+	}
+	double getPrice() const
+	{
+		return price;
+	}
+};
+void InventoryItem::storeInfo(int p, string d, int oH, double cost)
+{
+	partNum = p;
+	description = d;
+	onHand = oH;
+	price = cost;
+}
+InventoryItem createItem();    // Returns an Inventoryltem object
+void showValues(const InventoryItem&);
+int main()
+{
+	InventoryItem part = createItem();
+	showValues(part);
+	return 0;
+}
+InventoryItem createItem()
+{
+	InventoryItem tempItem;// Local Inventoryltem object
+	int partNum;    // Local variables to hold user input
+	string description;
+	int qty;
+	double price;
+	//Get the data from the user
+	cout << "Enter data for the new part number \n";
+	cout << "Part number: ";
+	cin >> partNum;
+	cout << "Description:";
+	cin.get();
+	getline(cin, description);
+	cout << "Quantity on hand: ";
+	cin >> qty;
+	cout << "Unit price: ";
+	cin >> price;
+	tempItem.storeInfo(partNum, description, qty, price);
+	return tempItem;
+}
+void showValues(const InventoryItem &item)
+{
+	cout << fixed << showpoint << setprecision(2) << endl;
+	cout << "Part Number : " << item.getPartNum() << endl;
+	cout << "Description : " << item.getDescription() << endl;
+	cout << "Units On Hand: " << item.getOnHand() << endl;
+	cout << "Price : $" << item.getPrice() << endl;
+}
