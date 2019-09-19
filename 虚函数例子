@@ -1,0 +1,48 @@
+//未使用虚函数
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+class Father                    //基类 Father
+{
+public:
+	void display() { cout << "Father::display()\n"; }
+	//在函数中调用了，子类覆盖基类的函数display() 
+	void fatherShowDisplay() { display(); }
+};
+
+class Son :public Father                 //子类Son 
+{
+public:
+	//重写基类中的display()函数
+	void display() { cout << "Son::display()\n"; }
+};
+
+int main()
+{
+	Son son;        //子类对象 
+	son.fatherShowDisplay();    //通过基类中未被覆盖的函数，想调用子类中覆盖的display函数 
+}
+
+//使用虚函数
+#include<iostream>
+using namespace std;
+class Father                    //基类 Father
+{
+public:
+	virtual void display() { cout << "Father::display()\n"; }
+	//在函数中调用了，子类覆盖基类的函数display() 
+	void fatherShowDisplay() { display(); }
+};
+
+class Son :public Father                 //子类Son 
+{
+public:
+	//重写基类中的display()函数
+	void display() { cout << "Son::display()\n"; }
+};
+
+int main()
+{
+	Son son;        //子类对象 
+	son.fatherShowDisplay();
+}
